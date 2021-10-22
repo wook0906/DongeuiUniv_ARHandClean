@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Basic_UI : UIScene
 {
     public List<Camera> camList = new List<Camera>();
+    
     public Camera currentCam;
+    Define.Views prevView;
     [SerializeField]
     Define.Views currentView = Define.Views.Both;
     public Define.Views CurrentView
@@ -34,6 +36,14 @@ public class Basic_UI : UIScene
         }
     }
     public bool isGloveOn = false;
+    bool isTimerOn = false;
+
+
+    enum Images
+    {
+        Timer_Image,
+        Hand_Image,
+    }
 
     enum Buttons
     {
@@ -41,6 +51,10 @@ public class Basic_UI : UIScene
         RightView_Button,
         HandClean_Button,
         Glove_Button,
+    }
+    enum Texts
+    {
+        Count_Text
     }
     public override void Init()
     {
@@ -52,7 +66,12 @@ public class Basic_UI : UIScene
         currentCam = camList[(int)CurrentView];
 
         Bind<Button>(typeof(Buttons));
+        Bind<Text>(typeof(Texts));
+        Bind<Image>(typeof(Images));
 
+        Get<Text>((int)Texts.Count_Text).enabled = false;
+        Get<Image>((int)Images.Hand_Image).enabled = false;
+        Get<Image>((int)Images.Timer_Image).enabled = false;
 
         Get<Button>((int)Buttons.LeftView_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
@@ -64,7 +83,11 @@ public class Basic_UI : UIScene
         }));
         Get<Button>((int)Buttons.HandClean_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
-            //TODO HandClean
+            if (isTimerOn)
+                return;
+            else
+                isTimerOn = true;
+            StartCoroutine(DoHandClean());
         }));
         Get<Button>((int)Buttons.Glove_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
@@ -86,5 +109,42 @@ public class Basic_UI : UIScene
             isGloveOn = false;
         else
             isGloveOn = true;
+    }
+
+    IEnumerator DoHandClean()
+    {
+        prevView = CurrentView;
+        CurrentView = Define.Views.Both;
+        Get<Text>((int)Texts.Count_Text).enabled = true;
+        Get<Image>((int)Images.Hand_Image).enabled = true;
+        Get<Image>((int)Images.Timer_Image).enabled = true;
+
+        float count = 20;
+        Get<Text>((int)Texts.Count_Text).text = count.ToString();
+        while (count > 0)
+        {
+            if (CurrentView != Define.Views.Both)
+            {
+                CurrentView = prevView;
+                isTimerOn = false;
+                Get<Image>((int)Images.Timer_Image).fillAmount = 1;
+                Get<Text>((int)Texts.Count_Text).enabled = false;
+                Get<Image>((int)Images.Hand_Image).enabled = false;
+                Get<Image>((int)Images.Timer_Image).enabled = false;
+                yield break;
+            }
+            count -= Time.deltaTime;
+            Get<Text>((int)Texts.Count_Text).text = count.ToString();
+            Get<Image>((int)Images.Timer_Image).fillAmount -= Time.deltaTime / 20;
+            yield return null;
+        }
+        isTimerOn = false;
+        CurrentView = prevView;
+        GameObject.Find("@Scene").GetComponent<BaseScene>().isNeedHandClean = false;
+        Get<Image>((int)Images.Timer_Image).fillAmount = 1;
+        Get<Text>((int)Texts.Count_Text).enabled = false;
+        Get<Image>((int)Images.Hand_Image).enabled = false;
+        Get<Image>((int)Images.Timer_Image).enabled = false;
+
     }
 }
