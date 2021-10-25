@@ -11,6 +11,15 @@ public class Scene_1 : BaseScene
     public GameObject bedFenceDown;
     public GameObject oxygenChecker;
     public Transform oxygenCheckerTargetTransform;
+    public GameObject pillowRight;
+    public GameObject rightLyingPatient;
+    public GameObject pillowLeft;
+    public GameObject leftLyingPatient;
+    public GameObject originLeftPatient;
+    public GameObject leftBedBlanket;
+
+
+    public Dictionary<Define.HandCleanRecord, bool> handCleanRecord = new Dictionary<Define.HandCleanRecord, bool>();
 
     Basic_UI ui;
     protected override void Init()
@@ -21,6 +30,11 @@ public class Scene_1 : BaseScene
         ui = Managers.UI.ShowSceneUI<Basic_UI>();
         Briefing_Popup briefing = Managers.UI.ShowPopupUI<Briefing_Popup>();
         TextAsset textAsset = new TextAsset("[상황제시]\n\n당신은 보이는 병실의 담당간호사입니다.\n환자1은 2시간마다  체위를 변경하고 있습니다.\n환자1의 체위를 변경하기 위해 병실로 들어가면서 상황이 시작됩니다.\n손소독제를 누르면 손위생을 수행하는\n20초 동안은 다른 활동을 해서는 안됩니다.");
+
+        for(Define.HandCleanRecord key = Define.HandCleanRecord.S1_1; key < Define.HandCleanRecord.S2_1; key++)
+        {
+            handCleanRecord.Add(key, false);
+        }
  
         briefing.SetText(textAsset);
     }
@@ -33,17 +47,23 @@ public class Scene_1 : BaseScene
         guide.SetInfo("***환자쪽에서 알람이 울리고있다!", Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
 
+        currentRecord = Define.HandCleanRecord.S1_1;
+
         Focusing_Popup focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("MonitorAlarm").transform, Define.Views.Right_Patient);
         needRenewPositionPopupList.Add(focus);
         
         yield return StartCoroutine(WaitTakeDone());
+        handCleanRecord[currentRecord] = isHandCleaned;
+        isHandCleaned = false;
         Debug.Log("모니터 알람 꺼짐!");
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("***환자의 산소포화도 측정기가 빠져있다!",Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
+
+        currentRecord = Define.HandCleanRecord.S1_2;
 
         focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
@@ -54,6 +74,7 @@ public class Scene_1 : BaseScene
         bedFenceUp.SetActive(false);
         bedFenceDown.SetActive(true);
         Debug.Log("펜스 내려감!");
+        handCleanRecord[currentRecord] = isHandCleaned;
 
 
         focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
@@ -63,7 +84,16 @@ public class Scene_1 : BaseScene
 
         yield return StartCoroutine(WaitTakeDone());
         oxygenChecker.transform.position = oxygenCheckerTargetTransform.position;
+        
         Debug.Log("산소포화도 측정기 원위치 함!");
+
+        //focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
+        //yield return new WaitUntil(() => focus);
+        //focus.SetAnchor(GameObject.Find("RightBedFenceDown").transform, Define.Views.Right_Patient);
+        //needRenewPositionPopupList.Add(focus);
+        //yield return StartCoroutine(WaitTakeDone());
+        //bedFenceUp.SetActive(true);
+        //bedFenceDown.SetActive(false);
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("***환자의 호출!", Define.Views.Left_Patient_RightView);
@@ -82,14 +112,19 @@ public class Scene_1 : BaseScene
         yield return StartCoroutine(WaitTakeDone());
         Debug.Log("왼쪽 환자의 침대를 올려줌!");
 
-        //이때 환자는 오른쪽으로 돌아누워있어야함.
+        guide = Managers.UI.ShowPopupUI<Guide_Popup>();
+        guide.SetInfo("환자의 체위를 바꿔주자.", Define.Views.Left_Patient_RightView);
+        yield return new WaitUntil(() => guide == null);
+        
         focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
-        focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_RightView);
+        focus.SetAnchor(GameObject.Find("RightPillow").transform, Define.Views.Left_Patient_RightView);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
         Debug.Log("오른쪽으로 돌아누워있는 환자 등에있는 베게를 치움!");
-        //이때 환자는 바로 눕혀져야함.
+        pillowRight.SetActive(false);
+        originLeftPatient.SetActive(true);
+        rightLyingPatient.SetActive(false);
 
         focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
@@ -97,23 +132,31 @@ public class Scene_1 : BaseScene
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
         Debug.Log("환자를 왼쪽으로 돌려 눕힘!");
+        originLeftPatient.SetActive(false);
+        leftLyingPatient.SetActive(true);
+
+        guide = Managers.UI.ShowPopupUI<Guide_Popup>();
+        guide.SetInfo("왼쪽에 베개를 끼워주자.", Define.Views.Left_Patient_LeftView);
+        yield return new WaitUntil(() => guide == null);
 
         focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
-        focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_RightView);
+        focus.SetAnchor(GameObject.Find("LeftPillow").transform, Define.Views.Left_Patient_LeftView);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
         Debug.Log("베게를 등에 갖다 대어줌!");
+        pillowLeft.SetActive(true);
 
         focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
-        focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_RightView);
+        focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_LeftView);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
         Debug.Log("이불 덮어줌!");
+        leftBedBlanket.SetActive(true);
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("처치를 다 했으니 퇴실하실?", Define.Views.Left_Patient_RightView);
+        guide.SetInfo("처치를 다 했으니 퇴실하실?", Define.Views.Both);
         yield return new WaitUntil(() => guide == null);
 
         Debug.Log("평가 데이터 전송, 상황1 종료");

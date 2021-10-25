@@ -13,7 +13,8 @@ public abstract class BaseScene : MonoBehaviour
     [HideInInspector]
     public List<UIPopup> needRenewPositionPopupList = new List<UIPopup>();
 
-    public bool isNeedHandClean = false;
+    public Define.HandCleanRecord currentRecord = Define.HandCleanRecord.None;
+    public bool isHandCleaned = true;
 
     void Awake()
     {
