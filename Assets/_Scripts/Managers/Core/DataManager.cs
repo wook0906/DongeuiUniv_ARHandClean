@@ -10,9 +10,11 @@ public interface ILoader<Key, Value>
 
 public class DataManager
 {
+    public AnswerSheetData answerSheetData;
 
     public void Init()
     {
+        answerSheetData = Managers.Resource.Load<AnswerSheetData>("ScriptableObj/AnswerSheet");
     }
 
     Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

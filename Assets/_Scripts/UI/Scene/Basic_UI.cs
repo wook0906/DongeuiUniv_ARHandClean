@@ -140,7 +140,7 @@ public class Basic_UI : UIScene
         }
         isTimerOn = false;
         CurrentView = prevView;
-        GameObject.Find("@Scene").GetComponent<BaseScene>().isNeedHandClean = false;
+        GameObject.Find("@Scene").GetComponent<BaseScene>().isDidCleanHand = true;
         Get<Image>((int)Images.Timer_Image).fillAmount = 1;
         Get<Text>((int)Texts.Count_Text).enabled = false;
         Get<Image>((int)Images.Hand_Image).enabled = false;

@@ -18,7 +18,7 @@ public class Managers : MonoBehaviour
     //#endregion
 
     #region core
-    //DataManager data = new DataManager();
+    DataManager data = new DataManager();
     InputManager input = new InputManager();
     PoolManager pool = new PoolManager();
     ResourceManager resource = new ResourceManager();
@@ -26,7 +26,7 @@ public class Managers : MonoBehaviour
     SoundManager sound = new SoundManager();
     UIManager ui = new UIManager();
 
-    //public static DataManager Data { get { return S.data; } }
+    public static DataManager Data { get { return S.data; } }
     public static InputManager Input { get { return S.input; } }
     public static PoolManager Pool { get { return S.pool; } }
     public static ResourceManager Resource { get { return S.resource; } }
@@ -48,7 +48,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             instance = go.AddComponent<Managers>();
 
-            //instance.data.Init();
+            instance.data.Init();
             instance.pool.Init();
             instance.sound.Init();
         }
