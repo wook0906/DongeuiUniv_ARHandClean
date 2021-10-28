@@ -9,6 +9,8 @@ public class Scene_3 : BaseScene
     public GameObject trayOnCabinet;
     public GameObject o2MaskTakeOff;
     public GameObject o2MaskTakeOn;
+    public GameObject blanket;
+    public GameObject notepad;
     Basic_UI ui;
 
     protected override void Init()
@@ -78,6 +80,7 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_RightView_CloseUp);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        blanket.SetActive(false);
         handCleanRecord[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
@@ -104,7 +107,7 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("LeftPatientLeg").transform, Define.Views.Left_Patient_RightView);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
-        Debug.Log("이불 덮어줌");
+        blanket.SetActive(true);
         handCleanRecord[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
@@ -139,15 +142,26 @@ public class Scene_3 : BaseScene
         isDidCleanHand = false;
 
         speech = Managers.UI.ShowPopupUI<SpeechBubble_Popup>();
-        speech.SetText(new TextAsset("소변 배액량을 확인하였음!"));
-        speech.SetAnchor(GameObject.Find("RightBedPee").transform, Define.Views.Left_Patient_RightView);
+        speech.SetText(new TextAsset("소변 배액량을 확인하였음! 기록지에 작성하여야함"));
+        speech.SetAnchor(GameObject.Find("RightBedPee").transform, Define.Views.Right_Bed_Pee);
         needRenewPositionPopupList.Add(speech);
         yield return new WaitUntil(() => speech == null);
 
         currentRecord = Define.HandCleanRecord.S3_8;
-        //기록지 작성 하는 장면 추가제작
+        focus = Managers.UI.ShowPopupUI<Focusing_Popup>();
+        yield return new WaitUntil(() => focus);
+        focus.SetAnchor(GameObject.Find("Notepad").transform, Define.Views.Right_Bed_Pee);
+        needRenewPositionPopupList.Add(focus);
+        yield return StartCoroutine(WaitTakeDone());
+        notepad.SetActive(true);
         handCleanRecord[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
+
+        speech = Managers.UI.ShowPopupUI<SpeechBubble_Popup>();
+        speech.SetText(new TextAsset("작성완료!"));
+        speech.SetAnchor(GameObject.Find("RightBedPee").transform, Define.Views.Right_Bed_Pee);
+        needRenewPositionPopupList.Add(speech);
+        yield return new WaitUntil(() => speech == null);
 
         currentRecord = Define.HandCleanRecord.S3_9;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();

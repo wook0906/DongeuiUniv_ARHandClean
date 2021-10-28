@@ -140,7 +140,9 @@ public class Basic_UI : UIScene
         }
         isTimerOn = false;
         CurrentView = prevView;
-        GameObject.Find("@Scene").GetComponent<BaseScene>().isDidCleanHand = true;
+        BaseScene curScene = GameObject.Find("@Scene").GetComponent<BaseScene>();
+        curScene.isDidCleanHand = true;
+        curScene.isHandInfected = false;
         Get<Image>((int)Images.Timer_Image).fillAmount = 1;
         Get<Text>((int)Texts.Count_Text).enabled = false;
         Get<Image>((int)Images.Hand_Image).enabled = false;

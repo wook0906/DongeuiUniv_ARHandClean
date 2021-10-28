@@ -15,7 +15,9 @@ public abstract class BaseScene : MonoBehaviour
 
     public Dictionary<Define.HandCleanRecord, bool> handCleanRecord = new Dictionary<Define.HandCleanRecord, bool>();
     public Define.HandCleanRecord currentRecord = Define.HandCleanRecord.None;
+    [HideInInspector]
     public bool isDidCleanHand = false;
+    public bool isHandInfected = true;
 
     void Awake()
     {
