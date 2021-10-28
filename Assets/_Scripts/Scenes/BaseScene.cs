@@ -13,11 +13,15 @@ public abstract class BaseScene : MonoBehaviour
     [HideInInspector]
     public List<UIPopup> needRenewPositionPopupList = new List<UIPopup>();
 
-    public Dictionary<Define.HandCleanRecord, bool> handCleanRecord = new Dictionary<Define.HandCleanRecord, bool>();
     public Define.HandCleanRecord currentRecord = Define.HandCleanRecord.None;
     [HideInInspector]
     public bool isDidCleanHand = false;
-    public bool isHandInfected = true;
+    public Define.Infection infectionState = Define.Infection.None;
+
+    bool isLeftHandOn = false;
+    bool isRightHandOn = false;
+
+    List<GameObject> covidList = new List<GameObject>(); 
 
     void Awake()
     {
@@ -45,4 +49,39 @@ public abstract class BaseScene : MonoBehaviour
     }
     public abstract void TakeDoneCallback();
     public abstract void Clear();
+
+    public bool IsHandOn()
+    {
+        if (isLeftHandOn && isRightHandOn)
+            return true;
+        return false;
+    }
+    public void ShowCovid()
+    {
+        foreach (var item in covidList)
+        {
+            item.SetActive(true);
+        }
+    }
+    public void GenerateCovid(Transform targetPos, Define.Infection infectionState)
+    {
+        
+        if (infectionState == Define.Infection.None) return;
+
+
+        GameObject covid = Managers.Resource.Instantiate("covid");
+        covid.transform.position = targetPos.position;
+        if (infectionState == Define.Infection.Left)
+            foreach (Transform item in covid.transform)
+                item.GetComponent<MeshRenderer>().material.color = Color.red;
+        else if (infectionState == Define.Infection.Right)
+            foreach (Transform item in covid.transform)
+                item.GetComponent<MeshRenderer>().material.color = Color.blue;
+        else
+            foreach (Transform item in covid.transform)
+                item.GetComponent<MeshRenderer>().material.color = new Color(1f, 0, 1f);
+
+        covid.SetActive(false);
+        covidList.Add(covid);
+    }
 }

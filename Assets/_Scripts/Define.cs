@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Define
 {
+    public enum Infection
+    {
+        None,
+        Left = 1<<0,
+        Right = 1<<1,
+        Both = Left | Right
+    }
+    public enum Side
+    {
+        Left,
+        Right,
+    }
     public enum HandCleanRecord
     {
         None,
@@ -81,6 +93,7 @@ public class Define
         Scene_2,
         Scene_3,
         Scene_4,
+        Max,
     }
     public enum Sound
     {

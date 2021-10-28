@@ -17,11 +17,7 @@ public class Scene_3 : BaseScene
     {
         base.Init();
         SceneType = Define.Scene.Scene_3;
-        handCleanRecord.Clear();
-        for (Define.HandCleanRecord key = Define.HandCleanRecord.S3_1; key <= Define.HandCleanRecord.S3_11; key++)
-        {
-            handCleanRecord.Add(key, false);
-        }
+        
         ui = Managers.UI.ShowSceneUI<Basic_UI>();
         Briefing_Popup briefing = Managers.UI.ShowPopupUI<Briefing_Popup>();
         TextAsset textAsset = new TextAsset("[상황제시]\n\n당신은 221호 담당간호사입니다.\n환자 1은 우측 쇄골 아래 반창고 부착 부위의 표피의 찰과상으로 피부소독이 필요한 상태입니다.\n장갑을 착용하고 드레싱을 하고 있는 상황에서 시작됩니다.\n손소독제를 누르면 손위생을 수행하는 20초 동안은 다른 활동을 해서는 안됩니다.");
@@ -44,6 +40,8 @@ public class Scene_3 : BaseScene
         needRenewPositionPopupList.Add(focus);
 
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("LeftCabinet").transform, infectionState);
+        infectionState |= Define.Infection.Left;
         foreach (var item in ui.camList)
         {
             item.transform.Find("tray").gameObject.SetActive(false);
@@ -55,7 +53,7 @@ public class Scene_3 : BaseScene
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("산소마스크가 벗겨져있음. 소독된 장갑을 벗고, 마스크를 바로 씌워주자.", Define.Views.Left_Patient_RightView_CloseUp);
         yield return new WaitUntil(() => guide == null && !ui.isGloveOn);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
 
@@ -65,9 +63,11 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("LeftPatientO2Mask").transform, Define.Views.Left_Patient_RightView_CloseUp);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("LeftPatientO2Mask").transform, infectionState);
+        infectionState |= Define.Infection.Left;
         o2MaskTakeOff.SetActive(false);
         o2MaskTakeOn.SetActive(true);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
@@ -80,8 +80,10 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_RightView_CloseUp);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("LeftPatientBody").transform, infectionState);
+        infectionState |= Define.Infection.Left;
         blanket.SetActive(false);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
@@ -93,6 +95,8 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("LeftPatientDressing").transform, Define.Views.Left_Patient_RightView_CloseUp);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("LeftPatientDressing").transform, infectionState);
+        infectionState |= Define.Infection.Left;
         //TODO 환자의 material을 교체.
         //Tray에 의료폐기물 배치
         Debug.Log("드레싱 완료");
@@ -107,15 +111,17 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("LeftPatientLeg").transform, Define.Views.Left_Patient_RightView);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("LeftPatientLeg").transform, infectionState);
+        infectionState |= Define.Infection.Left;
         blanket.SetActive(true);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         currentRecord = Define.HandCleanRecord.S3_5;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("오른쪽 환자의 호출", Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null && !ui.isGloveOn);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         SpeechBubble_Popup speech = Managers.UI.ShowPopupUI<SpeechBubble_Popup>();
@@ -130,15 +136,17 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("RightBedPee").transform, Define.Views.Right_Bed_Pee);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("RightBedPee").transform, infectionState);
+        infectionState |= Define.Infection.Right;
         Debug.Log("소변 잠금장치 풀어줌");
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         currentRecord = Define.HandCleanRecord.S3_7;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("소변 배액량을 확인합니까?", Define.Views.Right_Bed_Pee);
         yield return new WaitUntil(() => guide == null);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         speech = Managers.UI.ShowPopupUI<SpeechBubble_Popup>();
@@ -153,8 +161,10 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("Notepad").transform, Define.Views.Right_Bed_Pee);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("Notepad").transform, infectionState);
+        infectionState |= Define.Infection.Right;
         notepad.SetActive(true);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         speech = Managers.UI.ShowPopupUI<SpeechBubble_Popup>();
@@ -167,7 +177,7 @@ public class Scene_3 : BaseScene
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("왼쪽 환자의 호출", Define.Views.Left_Patient_RightView);
         yield return new WaitUntil(() => guide == null);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         speech = Managers.UI.ShowPopupUI<SpeechBubble_Popup>();
@@ -182,22 +192,31 @@ public class Scene_3 : BaseScene
         focus.SetAnchor(GameObject.Find("LeftCabinet").transform, Define.Views.Left_Patient_RightView);
         needRenewPositionPopupList.Add(focus);
         yield return StartCoroutine(WaitTakeDone());
+        GenerateCovid(GameObject.Find("LeftCabinet").transform, infectionState);
+        infectionState |= Define.Infection.Left;
         trayOnCabinet.SetActive(false);
         Debug.Log("의료폐기물이 든 트레이를 챙김!");
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         currentRecord = Define.HandCleanRecord.S3_11;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("처치를 다 했으니 퇴실하실?", Define.Views.Both);
+        guide.SetInfo("모든 처치를 완료하였음. 평가를 종료합니까?", Define.Views.Both);
         yield return new WaitUntil(() => guide == null);
-        handCleanRecord[currentRecord] = isDidCleanHand;
+        GenerateCovid(GameObject.Find("RightHand").transform, infectionState);
+        GenerateCovid(GameObject.Find("LeftHand").transform, infectionState);
+        Managers.Data.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
         Debug.Log("평가 데이터 전송, 상황3 종료");
         for (Define.HandCleanRecord i = Define.HandCleanRecord.S3_1; i <= Define.HandCleanRecord.S3_11; i++)
         {
-            Debug.Log($"입력 : {handCleanRecord[i]}, 답 : {Managers.Data.answerSheetData.answerDict[i]}");
+            Debug.Log($"입력 : {Managers.Data.handCleanRecords[i]}, 답 : {Managers.Data.answerSheetData.answerDict[i]}");
         }
+        //Managers.UI.ShowPopupUI<HandWait_Popup>();
+        //yield return new WaitUntil(() => IsHandOn());
+        ShowCovid();
+        ui.MoveSceneButtonOn();
+
     }
 
     IEnumerator WaitTakeDone()

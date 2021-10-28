@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Basic_UI : UIScene
 {
     public List<Camera> camList = new List<Camera>();
-    
+
+
     public Camera currentCam;
     Define.Views prevView;
     [SerializeField]
@@ -27,7 +28,7 @@ public class Basic_UI : UIScene
             }
                 
 
-            Debug.Log($"current : {currentView}");
+            //Debug.Log($"current : {currentView}");
             currentCam.gameObject.SetActive(false);
             currentCam = camList[(int)currentView-1];
             currentCam.gameObject.SetActive(true);
@@ -51,6 +52,8 @@ public class Basic_UI : UIScene
         RightView_Button,
         HandClean_Button,
         Glove_Button,
+        Retry_Button,
+        Next_Button,
     }
     enum Texts
     {
@@ -93,6 +96,15 @@ public class Basic_UI : UIScene
         {
             OnClickGloveButton();
         }));
+        Get<Button>((int)Buttons.Retry_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
+        {
+            Managers.Scene.LoadScene(Managers.Scene.currentScene.SceneType);
+        }));
+        Get<Button>((int)Buttons.Next_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
+        {
+            Managers.Scene.LoadScene(Managers.Scene.currentScene.SceneType + 1);
+        }));
+        MoveSceneButtonOff();
     }
     public void MoveView(Define.Views requestView)
     {
@@ -141,12 +153,32 @@ public class Basic_UI : UIScene
         isTimerOn = false;
         CurrentView = prevView;
         BaseScene curScene = GameObject.Find("@Scene").GetComponent<BaseScene>();
-        curScene.isDidCleanHand = true;
-        curScene.isHandInfected = false;
+        curScene.infectionState = Define.Infection.None;
         Get<Image>((int)Images.Timer_Image).fillAmount = 1;
         Get<Text>((int)Texts.Count_Text).enabled = false;
         Get<Image>((int)Images.Hand_Image).enabled = false;
         Get<Image>((int)Images.Timer_Image).enabled = false;
 
+    }
+
+    public void MoveSceneButtonOn()
+    {
+        if (Managers.Scene.currentScene.SceneType + 1 != Define.Scene.Max)
+            Get<Button>((int)Buttons.Next_Button).gameObject.SetActive(true);
+  
+        Get<Button>((int)Buttons.Retry_Button).gameObject.SetActive(true);
+    }
+    public void MoveSceneButtonOff()
+    {
+        Get<Button>((int)Buttons.Next_Button).gameObject.SetActive(false);
+        Get<Button>((int)Buttons.Retry_Button).gameObject.SetActive(false);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("ㅆㅃ");
+            Managers.Data.Save();
+        }
     }
 }
