@@ -11,15 +11,15 @@ public abstract class BaseScene : MonoBehaviour
 
     public Define.Scene SceneType { get; protected set; }
     [HideInInspector]
-    public List<UIPopup> needRenewPositionPopupList = new List<UIPopup>();
+    public List<UIBase> needRenewPositionPopupList = new List<UIBase>();
 
     public Define.HandCleanRecord currentRecord = Define.HandCleanRecord.None;
     [HideInInspector]
     public bool isDidCleanHand = false;
     public Define.Infection infectionState = Define.Infection.None;
 
-    bool isLeftHandOn = false;
-    bool isRightHandOn = false;
+    public ARHand rightHand;
+    public ARHand leftHand;
 
     List<GameObject> covidList = new List<GameObject>(); 
 
@@ -46,13 +46,16 @@ public abstract class BaseScene : MonoBehaviour
         Object obj = GameObject.FindObjectOfType(typeof(EventSystem));
         if (obj == null)
             Managers.Resource.Instantiate("UI/EventSystem").name = "@EventSystem";
+
+        rightHand = GameObject.Find("RightHand").GetComponent<ARHand>();
+        leftHand = GameObject.Find("LeftHand").GetComponent<ARHand>();
     }
     public abstract void TakeDoneCallback();
     public abstract void Clear();
 
     public bool IsHandOn()
     {
-        if (isLeftHandOn && isRightHandOn)
+        if (rightHand.isOn && leftHand.isOn)
             return true;
         return false;
     }
@@ -63,14 +66,22 @@ public abstract class BaseScene : MonoBehaviour
             item.SetActive(true);
         }
     }
-    public void GenerateCovid(Transform targetPos, Define.Infection infectionState)
+    public void GenerateCovid(Transform target, Define.Infection infectionState, bool isSetParent = false)
     {
         
         if (infectionState == Define.Infection.None) return;
 
-
-        GameObject covid = Managers.Resource.Instantiate("covid");
-        covid.transform.position = targetPos.position;
+        GameObject covid;
+        if (!isSetParent)
+        {
+            covid = Managers.Resource.Instantiate("covid");
+            covid.transform.position = target.position;
+        }
+        else
+        {
+            covid = Managers.Resource.Instantiate("covid", target);
+            covid.transform.position = Vector3.zero;
+        }
         if (infectionState == Define.Infection.Left)
             foreach (Transform item in covid.transform)
                 item.GetComponent<MeshRenderer>().material.color = Color.red;

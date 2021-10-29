@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Focusing_Popup : UIPopup
+public class Focusing_Popup : UIBase
 {
     Transform anchor;
     BaseScene curScene;
@@ -22,21 +22,25 @@ public class Focusing_Popup : UIPopup
 
     public override void Init()
     {
-        base.Init();
         curScene = GameObject.Find("@Scene").GetComponent<BaseScene>();
         Bind<Button>(typeof(Buttons));
         btn = Get<Button>((int)Buttons.FocusIcon_Button);
         btn.onClick.AddListener(() => {
             curScene.TakeDoneCallback();
             curScene.needRenewPositionPopupList.Remove(this);
-            ClosePopupUI();
+            Destroy(this.gameObject);
         });
         isInit = true;
+    }
+    private void Update()
+    {
+        btn.transform.rotation = Camera.main.transform.rotation;
     }
     public void SetAnchor(Transform anchor, Define.Views showView)
     {
         this.anchor = anchor;
         this.showView = showView;
+        btn.transform.position = anchor.position;
         RenewFocusPostion();
     }
     
@@ -45,7 +49,7 @@ public class Focusing_Popup : UIPopup
         if (Managers.UI.GetSceneUI<Basic_UI>().CurrentView == showView)
         {
             btn.GetComponent<Image>().enabled = true;
-            btn.transform.position = Managers.UI.GetSceneUI<Basic_UI>().currentCam.WorldToScreenPoint(anchor.transform.position);
+            //btn.transform.position = anchor.position;//Managers.UI.GetSceneUI<Basic_UI>().ARCam.WorldToScreenPoint(anchor.transform.position);
         }
         else
             btn.GetComponent<Image>().enabled = false;

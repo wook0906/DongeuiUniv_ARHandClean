@@ -81,4 +81,9 @@ public abstract class UIBase : MonoBehaviour
 
         evt.onDragHandler += ((PointerEventData data) => { evt.gameObject.transform.position = data.position; });
     }
+
+    public virtual void RenewFocusPostion()
+    {
+
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpeechBubble_Popup : UIPopup
+public class SpeechBubble_Popup : UIBase
 {
     [SerializeField]
     Transform anchor;
@@ -15,6 +15,8 @@ public class SpeechBubble_Popup : UIPopup
 
     BaseScene curScene;
 
+    GameObject ARCam;
+
     enum Images
     {
         BG,
@@ -25,11 +27,16 @@ public class SpeechBubble_Popup : UIPopup
     }
     // Start is called before the first frame update
 
-
+    private void Update()
+    {
+        if(bg)
+            bg.transform.rotation = Camera.main.transform.rotation;
+    }
     public override void Init()
     {
-        base.Init();
+       
         curScene = GameObject.Find("@Scene").GetComponent<BaseScene>();
+        ARCam = GameObject.Find("ARCamera");
 
         Bind<Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
@@ -37,6 +44,8 @@ public class SpeechBubble_Popup : UIPopup
         speechText = Get<Text>((int)Texts.Speech_Text);
         bg = Get<Image>((int)Images.BG);
         isInit = true;
+
+        transform.localScale *= Vector3.Distance(ARCam.transform.position, this.transform.position);
     }
     public void SetText(TextAsset text)
     {
@@ -64,7 +73,7 @@ public class SpeechBubble_Popup : UIPopup
         {
             bg.enabled = true;
             speechText.enabled = true;
-            bg.transform.position = Managers.UI.GetSceneUI<Basic_UI>().currentCam.WorldToScreenPoint(anchor.transform.position);
+            bg.transform.position = anchor.position;//Managers.UI.GetSceneUI<Basic_UI>().ARCam.WorldToScreenPoint(anchor.transform.position);
             StartCoroutine(ShowText());
         }
         else
@@ -78,6 +87,6 @@ public class SpeechBubble_Popup : UIPopup
     {
         yield return new WaitForSeconds(3f);
         curScene.needRenewPositionPopupList.Remove(this);
-        ClosePopupUI();
+        Destroy(this.gameObject);
     }
 }

@@ -18,7 +18,7 @@ public class DataManager
     public RecordData recordData = new RecordData();
 
     public string fileName = "20123903";
-    public Dictionary<Define.HandCleanRecord, bool> handCleanRecords = new Dictionary<Define.HandCleanRecord, bool>();
+    //public Dictionary<Define.HandCleanRecord, bool> handCleanRecords = new Dictionary<Define.HandCleanRecord, bool>();
 
    
 
@@ -26,13 +26,10 @@ public class DataManager
     {
         for (Define.HandCleanRecord i = Define.HandCleanRecord.S1_1; i <= Define.HandCleanRecord.S4_14; i++)
         {
-            //recordData.keyList.Add(i.ToString());
-            handCleanRecords.Add(i, false);
+            //handCleanRecords.Add(i, false);
             recordData.handCleanRecords.Add(i, false);
         }
         answerSheetData = Managers.Resource.Load<AnswerSheetData>("ScriptableObj/AnswerSheet");
-
-        
     }
 
     Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>

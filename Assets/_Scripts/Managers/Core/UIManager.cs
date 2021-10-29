@@ -111,6 +111,7 @@ public class UIManager
         return popup;
     }
 
+
     public void ClosePopupUI()
     {
         if (popupStack.Count == 0)

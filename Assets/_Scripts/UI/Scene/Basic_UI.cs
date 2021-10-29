@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Basic_UI : UIScene
 {
-    public List<Camera> camList = new List<Camera>();
+    public Dictionary<Define.Views, Transform> viewTransformDict = new Dictionary<Define.Views, Transform>();
 
 
-    public Camera currentCam;
+    public Camera ARCam;
+    public Camera UICam;
     Define.Views prevView;
     [SerializeField]
     Define.Views currentView = Define.Views.Both;
@@ -17,7 +18,7 @@ public class Basic_UI : UIScene
         get { return currentView; }
         set
         {
-            currentView = value;
+            
             if (value < Define.Views.Left_Patient_Stand)
             {
                 currentView = Define.Views.Left_Patient_Stand;
@@ -26,12 +27,15 @@ public class Basic_UI : UIScene
             {
                 currentView = Define.Views.Right_BedLever;
             }
-                
+            else
+            {
+                currentView = value;
+            }
 
-            //Debug.Log($"current : {currentView}");
-            currentCam.gameObject.SetActive(false);
-            currentCam = camList[(int)currentView-1];
-            currentCam.gameObject.SetActive(true);
+            ARCam.gameObject.SetActive(false);
+            ARCam.transform.position = viewTransformDict[currentView].position;
+            ARCam.transform.rotation = viewTransformDict[currentView].rotation;
+            ARCam.gameObject.SetActive(true);
 
             GameObject.Find("@Scene").GetComponent<BaseScene>().RenewFocusPositions();
         }
@@ -62,11 +66,15 @@ public class Basic_UI : UIScene
     public override void Init()
     {
         base.Init();
-        foreach (Transform item in GameObject.Find("Cams").transform)
+        ARCam = GameObject.Find("ARCamera").GetComponent<Camera>();
+        UICam = GameObject.Find("UICamera").GetComponent<Camera>();
+        
+
+        for (Define.Views i = Define.Views.Left_Patient_Stand; i <= Define.Views.Right_BedLever; i++)
         {
-            camList.Add(item.GetComponent<Camera>());
+            viewTransformDict.Add(i, GameObject.Find(i.ToString()).transform);
         }
-        currentCam = camList[(int)CurrentView];
+        
 
         Bind<Button>(typeof(Buttons));
         Bind<Text>(typeof(Texts));
@@ -121,6 +129,11 @@ public class Basic_UI : UIScene
             isGloveOn = false;
         else
             isGloveOn = true;
+    }
+    public void LateUpdate()
+    {
+        if(ARCam && UICam)
+        UICam.fieldOfView = ARCam.fieldOfView;
     }
 
     IEnumerator DoHandClean()
@@ -177,7 +190,6 @@ public class Basic_UI : UIScene
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Debug.Log("ㅆㅃ");
             Managers.Data.Save();
         }
     }

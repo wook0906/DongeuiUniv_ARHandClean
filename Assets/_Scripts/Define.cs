@@ -73,7 +73,7 @@ public class Define
     }
     public enum Views
     {
-        None,
+        //None,
         Left_Patient_Stand,
         Left_Patient_LeftView,
         Left_BedLever,

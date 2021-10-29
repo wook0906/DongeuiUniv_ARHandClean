@@ -49,7 +49,7 @@ public class Guide_Popup : UIPopup
     {
         yield return new WaitUntil(() => isInit);
         guide.text = guideText;
-        if (targetView == Define.Views.None) yield break;
+        //if (targetView == Define.Views.None) yield break;
         this.targetView = targetView;
     }
 
