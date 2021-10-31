@@ -29,6 +29,40 @@ public class BehaviourAnalysisTable_Popup : UIPopup
         {
             ClosePopupUI();
         }));
+
+        switch (Managers.Scene.currentScene.SceneType)
+        {
+            case Define.Scene.Scene_1:
+                for (Define.HandCleanRecord i = Define.HandCleanRecord.S1_1; i <= Define.HandCleanRecord.S1_10; i++)
+                {
+                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
+                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                }
+                break;
+            case Define.Scene.Scene_2:
+                for (Define.HandCleanRecord i = Define.HandCleanRecord.S2_1; i <= Define.HandCleanRecord.S2_12; i++)
+                {
+                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
+                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                }
+                break;
+            case Define.Scene.Scene_3:
+                for (Define.HandCleanRecord i = Define.HandCleanRecord.S3_1; i <= Define.HandCleanRecord.S3_11; i++)
+                {
+                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
+                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                }
+                break;
+            case Define.Scene.Scene_4:
+                for (Define.HandCleanRecord i = Define.HandCleanRecord.S4_1; i <= Define.HandCleanRecord.S4_14; i++)
+                {
+                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
+                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                }
+                break;
+            default:
+                break;
+        }
         isInit = true;
     }
 }
