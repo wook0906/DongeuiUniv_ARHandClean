@@ -5,6 +5,15 @@ using UnityEngine;
 public class UIManager
 {
     int order = 0;
+    int Order
+    {
+        get { return order; }
+        set 
+        {
+            Debug.Log($"Next order : {order}");
+            order = value;
+        }
+    }
 
     //Stack<UIPopup> popupStack = new Stack<UIPopup>();
     List<UIPopup> popupStack = new List<UIPopup>();
@@ -30,8 +39,8 @@ public class UIManager
 
         if (isNeedSort)
         {
-            canvas.sortingOrder = order;
-            order++;
+            canvas.sortingOrder = Order;
+            Order++;
         }
         else
         {
@@ -117,12 +126,13 @@ public class UIManager
         if (popupStack.Count == 0)
             return;
         //UIPopup popup = popupStack.Pop();
+        //Order--;
         UIPopup popup = popupStack[popupStack.Count - 1];
         popupStack.Remove(popup);
         Managers.Resource.Destroy(popup.gameObject);
         popup = null;
 
-        order--;
+        
     }
     public void ClosePopupUI<T>() where T : UIPopup
     {
@@ -137,7 +147,7 @@ public class UIManager
                 popupStack.Remove(popup);
                 Managers.Resource.Destroy(popup.gameObject);
                 popup = null;
-                order--;
+                //Order--;
                 return;
             }
         }

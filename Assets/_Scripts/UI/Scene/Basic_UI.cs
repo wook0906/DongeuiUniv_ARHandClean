@@ -186,6 +186,28 @@ public class Basic_UI : UIScene
         Get<Button>((int)Buttons.Next_Button).gameObject.SetActive(false);
         Get<Button>((int)Buttons.Retry_Button).gameObject.SetActive(false);
     }
+
+    public void SetInteractable(bool on)
+    {
+        if (!on)
+        {
+            Get<Button>((int)Buttons.LeftView_Button).gameObject.SetActive(false);
+            Get<Button>((int)Buttons.RightView_Button).gameObject.SetActive(false);
+            Get<Button>((int)Buttons.HandClean_Button).gameObject.SetActive(false);
+            Get<Button>((int)Buttons.Glove_Button).gameObject.SetActive(false);
+            Get<Button>((int)Buttons.Retry_Button).gameObject.SetActive(false);
+            Get<Button>((int)Buttons.Next_Button).gameObject.SetActive(false);
+        }
+        else
+        {
+            Get<Button>((int)Buttons.LeftView_Button).gameObject.SetActive(true);
+            Get<Button>((int)Buttons.RightView_Button).gameObject.SetActive(true);
+            Get<Button>((int)Buttons.HandClean_Button).gameObject.SetActive(true);
+            Get<Button>((int)Buttons.Glove_Button).gameObject.SetActive(true);
+            Get<Button>((int)Buttons.Retry_Button).gameObject.SetActive(true);
+            Get<Button>((int)Buttons.Next_Button).gameObject.SetActive(true);
+        }
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))

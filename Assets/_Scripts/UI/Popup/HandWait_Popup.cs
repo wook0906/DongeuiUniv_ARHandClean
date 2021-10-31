@@ -34,7 +34,7 @@ public class HandWait_Popup : UIPopup
         Bind<Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
 
-        Get<Text>((int)Texts.Content_Text).text = "양손의 QR코드를 인식시켜 주세요";
+        Get<Text>((int)Texts.Content_Text).text = "결과 확인을 위해 양손의 QR코드를 인식시켜 주세요";
         isInit = true;
     }
 }

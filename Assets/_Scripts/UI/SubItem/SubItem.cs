@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Inven_SubItem: UIBase
+public class SubItem : UIBase
 {
     enum Texts
     {

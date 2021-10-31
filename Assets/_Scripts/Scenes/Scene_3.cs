@@ -27,6 +27,7 @@ public class Scene_3 : BaseScene
     IEnumerator Scenario()
     {
         yield return new WaitUntil(() => Managers.UI.GetSceneUI<Basic_UI>() != null);
+        ui.MoveSceneButtonOff();
         ui.SetGloveButton(true);
 
         currentRecord = Define.HandCleanRecord.S3_1;
@@ -200,20 +201,23 @@ public class Scene_3 : BaseScene
 
         currentRecord = Define.HandCleanRecord.S3_11;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("모든 처치를 완료하였음. 평가를 종료합니까?", Define.Views.Both);
+        guide.SetInfo("모든 처치를 완료하였음. 퇴실합니까?", Define.Views.Both);
         yield return new WaitUntil(() => guide == null);
         GenerateCovid(GameObject.Find("RightHand").transform, infectionState, true);
         GenerateCovid(GameObject.Find("LeftHand").transform, infectionState, true);
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
+
         Debug.Log("평가 데이터 전송, 상황3 종료");
-        for (Define.HandCleanRecord i = Define.HandCleanRecord.S3_1; i <= Define.HandCleanRecord.S3_11; i++)
-        {
-            Debug.Log($"입력 : {Managers.Data.recordData.handCleanRecords[i]}, 답 : {Managers.Data.answerSheetData.answerDict[i]}");
-        }
-        HandWait_Popup waitPopup = Managers.UI.ShowPopupUI<HandWait_Popup>();
-        yield return new WaitUntil(() => IsHandOn());
-        waitPopup.ClosePopupUI();
+
+        Debriefing_Popup debriefing = Managers.UI.ShowPopupUI<Debriefing_Popup>();
+        yield return new WaitUntil(() => debriefing == null);
+        BehaviourAnalysisTable_Popup analysis = Managers.UI.ShowPopupUI<BehaviourAnalysisTable_Popup>();
+        yield return new WaitUntil(() => analysis == null);
+
+        //HandWait_Popup waitPopup = Managers.UI.ShowPopupUI<HandWait_Popup>();
+        //yield return new WaitUntil(() => IsHandOn());
+        //waitPopup.ClosePopupUI();
         ShowCovid();
         ui.MoveSceneButtonOn();
 
