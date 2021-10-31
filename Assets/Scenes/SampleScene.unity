@@ -4216,10 +4216,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needRenewPositionPopupList: []
+  currentRecord: 0
+  isHandCleaned: 1
   bedFenceUp: {fileID: 475275173}
   bedFenceDown: {fileID: 1989667566}
   oxygenChecker: {fileID: 7464862324930159146}
   oxygenCheckerTargetTransform: {fileID: 717238763}
+  pillowRight: {fileID: 0}
+  rightLyingPatient: {fileID: 0}
+  pillowLeft: {fileID: 0}
+  leftLyingPatient: {fileID: 0}
+  originLeftPatient: {fileID: 0}
+  leftBedBlanket: {fileID: 0}
 --- !u!4 &376831114
 Transform:
   m_ObjectHideFlags: 0
