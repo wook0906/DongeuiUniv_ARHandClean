@@ -270,7 +270,7 @@ public class Scene_2 : BaseScene
 
         Debriefing_Popup debriefing = Managers.UI.ShowPopupUI<Debriefing_Popup>();
         yield return new WaitUntil(() => debriefing == null);
-        BehaviourAnalysisTable_Popup analysis = Managers.UI.ShowPopupUI<BehaviourAnalysisTable_Popup>();
+        BehaviourAnalysisTable_Popup analysis = Managers.UI.ShowPopupUI<BehaviourAnalysisTable_Popup>("BehaviourAnalysisTable2_Popup");
         yield return new WaitUntil(() => analysis == null);
 
 
