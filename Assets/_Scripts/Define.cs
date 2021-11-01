@@ -89,6 +89,7 @@ public class Define
     public enum Scene
     {
         UnKnown,
+        StartScene,
         Scene_1,
         Scene_2,
         Scene_3,

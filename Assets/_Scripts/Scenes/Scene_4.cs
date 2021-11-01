@@ -331,9 +331,9 @@ public class Scene_4 : BaseScene
         BehaviourAnalysisTable_Popup analysis = Managers.UI.ShowPopupUI<BehaviourAnalysisTable_Popup>("BehaviourAnalysisTable4_Popup");
         yield return new WaitUntil(() => analysis == null);
 
-        //HandWait_Popup waitPopup = Managers.UI.ShowPopupUI<HandWait_Popup>();
-        //yield return new WaitUntil(() => IsHandOn());
-        //waitPopup.ClosePopupUI();
+        HandWait_Popup waitPopup = Managers.UI.ShowPopupUI<HandWait_Popup>();
+        yield return new WaitUntil(() => IsHandOn());
+        waitPopup.ClosePopupUI();
         ShowCovid();
 
         ui.MoveSceneButtonOn();

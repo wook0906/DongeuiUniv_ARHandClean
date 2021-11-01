@@ -274,9 +274,9 @@ public class Scene_2 : BaseScene
         yield return new WaitUntil(() => analysis == null);
 
 
-        //HandWait_Popup waitPopup = Managers.UI.ShowPopupUI<HandWait_Popup>();
-        //yield return new WaitUntil(() => IsHandOn());
-        //waitPopup.ClosePopupUI();
+        HandWait_Popup waitPopup = Managers.UI.ShowPopupUI<HandWait_Popup>();
+        yield return new WaitUntil(() => IsHandOn());
+        waitPopup.ClosePopupUI();
         ShowCovid();
         ui.MoveSceneButtonOn();
     }

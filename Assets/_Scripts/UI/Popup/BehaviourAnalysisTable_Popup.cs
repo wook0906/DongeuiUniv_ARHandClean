@@ -7,10 +7,7 @@ public class BehaviourAnalysisTable_Popup : UIPopup
 {
     bool isInit = false;
 
-    enum Texts
-    {
-        HandCleanPercent_Text,
-    }
+
     enum Buttons
     {
         Ok_Button,
@@ -22,7 +19,6 @@ public class BehaviourAnalysisTable_Popup : UIPopup
     {
         base.Init();
 
-        Bind<Text>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
 
         Get<Button>((int)Buttons.Ok_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>

@@ -110,7 +110,13 @@ public class Basic_UI : UIScene
         }));
         Get<Button>((int)Buttons.Next_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
-            Managers.Scene.LoadScene(Managers.Scene.currentScene.SceneType + 1);
+            if (Managers.Scene.currentScene.SceneType != Define.Scene.Scene_4)
+                Managers.Scene.LoadScene(Managers.Scene.currentScene.SceneType + 1);
+            else
+            {
+                Managers.UI.ShowPopupUI<TotalResult_Popup>();
+                SetInteractable(false);
+            }
         }));
         MoveSceneButtonOff();
     }
@@ -126,9 +132,15 @@ public class Basic_UI : UIScene
     public void OnClickGloveButton()
     {
         if (isGloveOn)
+        {
             isGloveOn = false;
+            Get<Button>((int)Buttons.Glove_Button).GetComponent<Image>().sprite = Managers.Resource.Load<Sprite>("Sprites/GloveOn");
+        }
         else
+        {
             isGloveOn = true;
+            Get<Button>((int)Buttons.Glove_Button).GetComponent<Image>().sprite = Managers.Resource.Load<Sprite>("Sprites/GloveOff");
+        }
     }
     public void LateUpdate()
     {
@@ -176,9 +188,7 @@ public class Basic_UI : UIScene
 
     public void MoveSceneButtonOn()
     {
-        if (Managers.Scene.currentScene.SceneType + 1 != Define.Scene.Max)
-            Get<Button>((int)Buttons.Next_Button).gameObject.SetActive(true);
-  
+        Get<Button>((int)Buttons.Next_Button).gameObject.SetActive(true);
         Get<Button>((int)Buttons.Retry_Button).gameObject.SetActive(true);
     }
     public void MoveSceneButtonOff()

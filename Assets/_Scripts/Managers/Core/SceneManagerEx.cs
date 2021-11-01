@@ -19,6 +19,7 @@ public class SceneManagerEx
     }
     public void Clear()
     {
-        currentScene.Clear();
+        if(currentScene)
+            currentScene.Clear();
     }
 }
