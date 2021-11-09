@@ -17,7 +17,7 @@ public class DataManager
 
     public RecordData recordData = new RecordData();
 
-    public string fileName = "20123903";
+    //public string fileName = "20123903";
     //public Dictionary<Define.HandCleanRecord, bool> handCleanRecords = new Dictionary<Define.HandCleanRecord, bool>();
 
    
@@ -44,40 +44,40 @@ public class DataManager
         string json = JsonConvert.SerializeObject(recordData);
         Debug.Log(json);
     }
-    public void Load()
-    {
-        //tring json = ReadFromFile($"{fileName}.txt");
-        //JsonUtility.FromJsonOverwrite(json, recordData);
-    }
-    public void WriteToFile(string json)
-    {
-        string path = GetFilePath($"{fileName}.txt");
-        FileStream fileStream = new FileStream(path, FileMode.Create);
+    //public void Load()
+    //{
+    //    //tring json = ReadFromFile($"{fileName}.txt");
+    //    //JsonUtility.FromJsonOverwrite(json, recordData);
+    //}
+    //public void WriteToFile(string json)
+    //{
+    //    string path = GetFilePath($"{fileName}.txt");
+    //    FileStream fileStream = new FileStream(path, FileMode.Create);
 
-        using (StreamWriter writer = new StreamWriter(fileStream))
-        {
-            writer.Write(json);
-        }
+    //    using (StreamWriter writer = new StreamWriter(fileStream))
+    //    {
+    //        writer.Write(json);
+    //    }
 
-    }
-    public string ReadFromFile(string fileName)
-    {
-        string path = GetFilePath($"{fileName}.txt");
-        if (File.Exists(path))
-        {
-            using (StreamReader reader = new StreamReader(path))
-            {
-                string json = reader.ReadToEnd();
-                return json;
-            }
-        }
-        else
-            Debug.LogError("File Not Found!");
+    //}
+    //public string ReadFromFile(string fileName)
+    //{
+    //    string path = GetFilePath($"{fileName}.txt");
+    //    if (File.Exists(path))
+    //    {
+    //        using (StreamReader reader = new StreamReader(path))
+    //        {
+    //            string json = reader.ReadToEnd();
+    //            return json;
+    //        }
+    //    }
+    //    else
+    //        Debug.LogError("File Not Found!");
         
-        return "";
-    }
-    public string GetFilePath(string fileName)
-    {
-        return Application.persistentDataPath + "/" + fileName;
-    }
+    //    return "";
+    //}
+    //public string GetFilePath(string fileName)
+    //{
+    //    return Application.persistentDataPath + "/" + fileName;
+    //}
 }

@@ -10,50 +10,80 @@ public class BehaviourAnalysisTable_Popup : UIPopup
 
     enum Buttons
     {
-        Ok_Button,
+        Next_Button,
+    }
+
+    enum GameObjects
+    {
+        Content
     }
     // Start is called before the first frame update
 
-
+    Transform scrollViewItemRoot;
+    Vector2 sizeDelta;
     public override void Init()
     {
         base.Init();
 
         Bind<Button>(typeof(Buttons));
+        Bind<GameObject>(typeof(GameObjects));
 
-        Get<Button>((int)Buttons.Ok_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
+        Get<Button>((int)Buttons.Next_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
             ClosePopupUI();
         }));
 
+        scrollViewItemRoot = Get<GameObject>((int)GameObjects.Content).transform;
+        sizeDelta = scrollViewItemRoot.GetComponent<RectTransform>().sizeDelta;
+        StartCoroutine(CorInit());
+       
+    }
+    IEnumerator CorInit()
+    {
         switch (Managers.Scene.currentScene.SceneType)
         {
             case Define.Scene.Scene_1:
                 for (Define.HandCleanRecord i = Define.HandCleanRecord.S1_1; i <= Define.HandCleanRecord.S1_10; i++)
                 {
-                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
-                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                    AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
+                    item.transform.localScale = Vector3.one;
+                    yield return new WaitUntil(() => item);
+                    item.SetInfo(i);
+                    sizeDelta.y += 110;
+                    scrollViewItemRoot.GetComponent<RectTransform>().sizeDelta = sizeDelta;
                 }
                 break;
             case Define.Scene.Scene_2:
                 for (Define.HandCleanRecord i = Define.HandCleanRecord.S2_1; i <= Define.HandCleanRecord.S2_12; i++)
                 {
-                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
-                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                    AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
+                    item.transform.localScale = Vector3.one;
+                    yield return new WaitUntil(() => item);
+                    item.SetInfo(i);
+                    sizeDelta.y += 110;
+                    scrollViewItemRoot.GetComponent<RectTransform>().sizeDelta = sizeDelta;
                 }
                 break;
             case Define.Scene.Scene_3:
                 for (Define.HandCleanRecord i = Define.HandCleanRecord.S3_1; i <= Define.HandCleanRecord.S3_11; i++)
                 {
-                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
-                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                    AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
+                    item.transform.localScale = Vector3.one;
+                    yield return new WaitUntil(() => item);
+                    item.SetInfo(i);
+                    sizeDelta.y += 110;
+                    scrollViewItemRoot.GetComponent<RectTransform>().sizeDelta = sizeDelta;
                 }
                 break;
             case Define.Scene.Scene_4:
                 for (Define.HandCleanRecord i = Define.HandCleanRecord.S4_1; i <= Define.HandCleanRecord.S4_14; i++)
                 {
-                    GameObject.Find(i.ToString()).transform.Find("Input").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] ? "O" : "X";
-                    GameObject.Find(i.ToString()).transform.Find("Check").GetComponent<Text>().text = Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i] ? "O" : "X";
+                    AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
+                    item.transform.localScale = Vector3.one;
+                    yield return new WaitUntil(() => item);
+                    item.SetInfo(i);
+                    sizeDelta.y += 110;
+                    scrollViewItemRoot.GetComponent<RectTransform>().sizeDelta = sizeDelta;
                 }
                 break;
             default:

@@ -5,6 +5,7 @@ using UnityEditor;
 using System.Reflection;
 using System;
 
+[CustomPropertyDrawer(typeof(SituationDataDictionary))]
 [CustomPropertyDrawer(typeof(AnswerSheetDictionary))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {

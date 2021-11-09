@@ -10,7 +10,7 @@ public class UIManager
         get { return order; }
         set 
         {
-            Debug.Log($"Next order : {order}");
+
             order = value;
         }
     }
@@ -77,6 +77,7 @@ public class UIManager
         return Utils.GetOrAddComponent<T>(go);
 
     }
+
     public T ShowSceneUI<T>(string name = null) where T : UIScene
     {
         if (string.IsNullOrEmpty(name))

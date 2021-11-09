@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StartScene_UI : UIScene
 {
-    string studNum = "00000000";
+    string sex = "00000000";
     enum InputFields
     {
         StudentNumberField,
@@ -23,14 +23,14 @@ public class StartScene_UI : UIScene
         Get<InputField>((int)InputFields.StudentNumberField).onEndEdit.AddListener(delegate { SaveStudNum(Get<InputField>((int)InputFields.StudentNumberField).text); });
         Get<Button>((int)Buttons.Start_Button).onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
         {
-            Managers.Data.recordData.studNum = studNum;
-            Debug.Log($"Save StudNum : {studNum}");
+            Managers.Data.recordData.sex = sex;
+            Debug.Log($"Save Sex : {sex}");
             Managers.Scene.LoadScene(Define.Scene.Scene_1);
         }));
     }
-    void SaveStudNum(string studNum)
+    void SaveStudNum(string sex)
     {
-        if(studNum != string.Empty)
-            this.studNum = studNum;
+        if(sex != string.Empty)
+            this.sex = sex;
     }
 }
