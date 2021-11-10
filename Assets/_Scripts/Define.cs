@@ -16,7 +16,7 @@ public class Define
         Left,
         Right,
     }
-    public enum HandCleanRecord
+    public enum SituationCode
     {
         None,
 

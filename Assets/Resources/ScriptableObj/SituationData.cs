@@ -10,7 +10,7 @@ public class SituationData : ScriptableObject
 }
 
 [Serializable]
-public class SituationDataDictionary : SerializableDictionary<Define.HandCleanRecord, Situation> { }
+public class SituationDataDictionary : SerializableDictionary<Define.SituationCode, Situation> { }
 
 [Serializable]
 public class Situation

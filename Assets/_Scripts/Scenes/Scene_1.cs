@@ -42,7 +42,7 @@ public class Scene_1 : BaseScene
         guide.SetInfo("***환자쪽에서 알람이 울리고있다!", Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S1_1;
+        currentRecord = Define.SituationCode.S1_1;
 
         Focusing_Popup focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
@@ -60,7 +60,7 @@ public class Scene_1 : BaseScene
         guide.SetInfo("***환자의 산소포화도 측정기가 빠져있다!",Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S1_2;
+        currentRecord = Define.SituationCode.S1_2;
 
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
@@ -75,7 +75,7 @@ public class Scene_1 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S1_3;
+        currentRecord = Define.SituationCode.S1_3;
 
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
@@ -91,7 +91,7 @@ public class Scene_1 : BaseScene
         isDidCleanHand = false;
 
 
-        currentRecord = Define.HandCleanRecord.S1_4;
+        currentRecord = Define.SituationCode.S1_4;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("RightBedFenceDown").transform, Define.Views.Right_Patient);
@@ -104,7 +104,7 @@ public class Scene_1 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S1_5;
+        currentRecord = Define.SituationCode.S1_5;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("***환자의 호출!", Define.Views.Left_Patient_RightView);
         yield return new WaitUntil(() => guide == null);
@@ -133,7 +133,7 @@ public class Scene_1 : BaseScene
         guide.SetInfo("환자의 체위를 바꿔주자.", Define.Views.Left_Patient_RightView);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S1_6;
+        currentRecord = Define.SituationCode.S1_6;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("RightPillow").transform, Define.Views.Left_Patient_RightView);
@@ -149,7 +149,7 @@ public class Scene_1 : BaseScene
         isDidCleanHand = false;
         
 
-        currentRecord = Define.HandCleanRecord.S1_7;
+        currentRecord = Define.SituationCode.S1_7;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_RightView);
@@ -168,7 +168,7 @@ public class Scene_1 : BaseScene
         guide.SetInfo("왼쪽에 베개를 끼워주자.", Define.Views.Left_Patient_LeftView);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S1_8;
+        currentRecord = Define.SituationCode.S1_8;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftPillow").transform, Define.Views.Left_Patient_LeftView);
@@ -181,7 +181,7 @@ public class Scene_1 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S1_9;
+        currentRecord = Define.SituationCode.S1_9;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_LeftView);
@@ -194,7 +194,7 @@ public class Scene_1 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S1_10;
+        currentRecord = Define.SituationCode.S1_10;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("모든 처치를 완료하였음. 퇴실합니까?", Define.Views.Both);
         yield return new WaitUntil(() => guide == null);

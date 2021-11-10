@@ -20,9 +20,9 @@ public class TotalResult_Popup : UIPopup
         base.Init();
         Bind<Text>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
-        for (Define.HandCleanRecord i = Define.HandCleanRecord.S1_1; i <= Define.HandCleanRecord.S4_14; i++)
+        for (Define.SituationCode i = Define.SituationCode.S1_1; i <= Define.SituationCode.S4_14; i++)
         {
-            if (Managers.Data.recordData.handCleanRecords[i])
+            if (Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i])
                 correctCnt++;
         }
 

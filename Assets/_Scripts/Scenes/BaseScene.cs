@@ -13,7 +13,7 @@ public abstract class BaseScene : MonoBehaviour
     [HideInInspector]
     public List<UIBase> needRenewPositionPopupList = new List<UIBase>();
 
-    public Define.HandCleanRecord currentRecord = Define.HandCleanRecord.None;
+    public Define.SituationCode currentRecord = Define.SituationCode.None;
     [HideInInspector]
     public bool isDidCleanHand = false;
     public Define.Infection infectionState = Define.Infection.None;

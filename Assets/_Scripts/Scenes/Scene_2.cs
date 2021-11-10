@@ -48,7 +48,7 @@ public class Scene_2 : BaseScene
         guide.SetInfo("***트레이를 내려놓아야 함", Define.Views.Left_Patient_RightView);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S2_1;
+        currentRecord = Define.SituationCode.S2_1;
         Focusing_Popup focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftBedTable").transform, Define.Views.Left_Patient_RightView);
@@ -82,7 +82,7 @@ public class Scene_2 : BaseScene
         Debug.Log("수액 집어듬!");
         
 
-        currentRecord = Define.HandCleanRecord.S2_2;
+        currentRecord = Define.SituationCode.S2_2;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftEmptyFluid").transform, Define.Views.Left_Patient_Stand);
@@ -106,7 +106,7 @@ public class Scene_2 : BaseScene
         guide.SetInfo("정맥 펌프를 끄세요", Define.Views.Left_Patient_Stand);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S2_3;
+        currentRecord = Define.SituationCode.S2_3;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftPump").transform, Define.Views.Left_Patient_Stand);
@@ -123,7 +123,7 @@ public class Scene_2 : BaseScene
         needRenewPositionPopupList.Add(speech);
         yield return new WaitUntil(() => speech == null);
 
-        currentRecord = Define.HandCleanRecord.S2_4;
+        currentRecord = Define.SituationCode.S2_4;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftBedFence").transform, Define.Views.Left_Patient_LeftView);
@@ -137,7 +137,7 @@ public class Scene_2 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S2_5;
+        currentRecord = Define.SituationCode.S2_5;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftPatientBody").transform, Define.Views.Left_Patient_LeftView);
@@ -149,7 +149,7 @@ public class Scene_2 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S2_6;
+        currentRecord = Define.SituationCode.S2_6;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftPatientArm").transform, Define.Views.Left_Patient_LeftView);
@@ -187,7 +187,7 @@ public class Scene_2 : BaseScene
         guide.SetInfo("정맥 펌프를 다시 켜세요", Define.Views.Left_Patient_Stand);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S2_7;
+        currentRecord = Define.SituationCode.S2_7;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("LeftPump").transform, Define.Views.Left_Patient_Stand);
@@ -199,7 +199,7 @@ public class Scene_2 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S2_8;
+        currentRecord = Define.SituationCode.S2_8;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("오른쪽 환자가 부릅니다", Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
@@ -212,7 +212,7 @@ public class Scene_2 : BaseScene
         needRenewPositionPopupList.Add(speech);
         yield return new WaitUntil(() => speech == null);
 
-        currentRecord = Define.HandCleanRecord.S2_9;
+        currentRecord = Define.SituationCode.S2_9;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("RightBedFence").transform, Define.Views.Right_Patient);
@@ -226,7 +226,7 @@ public class Scene_2 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S2_10;
+        currentRecord = Define.SituationCode.S2_10;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("RightBedPee").transform, Define.Views.Right_Bed_Pee);
@@ -244,7 +244,7 @@ public class Scene_2 : BaseScene
         guide.SetInfo("환자를 천천히 일으켜주세요", Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
 
-        currentRecord = Define.HandCleanRecord.S2_11;
+        currentRecord = Define.SituationCode.S2_11;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
         yield return new WaitUntil(() => focus);
         focus.SetAnchor(GameObject.Find("RightPatientBody").transform, Define.Views.Right_Patient_Sit);
@@ -257,7 +257,7 @@ public class Scene_2 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        currentRecord = Define.HandCleanRecord.S2_12;
+        currentRecord = Define.SituationCode.S2_12;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
         guide.SetInfo("모든 처치를 완료하였음. 퇴실합니까?", Define.Views.Both);
         yield return new WaitUntil(() => guide == null);
@@ -270,7 +270,7 @@ public class Scene_2 : BaseScene
 
         Debriefing_Popup debriefing = Managers.UI.ShowPopupUI<Debriefing_Popup>();
         yield return new WaitUntil(() => debriefing == null);
-        BehaviourAnalysisTable_Popup analysis = Managers.UI.ShowPopupUI<BehaviourAnalysisTable_Popup>("BehaviourAnalysisTable2_Popup");
+        BehaviourAnalysisTable_Popup analysis = Managers.UI.ShowPopupUI<BehaviourAnalysisTable_Popup>();
         yield return new WaitUntil(() => analysis == null);
 
 

@@ -10,5 +10,5 @@ public class RecordData
     public int grade = 0;
     public string email = "Temp@Temp.com";
     public string phoneNumber = "01234567890";
-    public Dictionary<Define.HandCleanRecord, bool> handCleanRecords = new Dictionary<Define.HandCleanRecord, bool>();
+    public Dictionary<Define.SituationCode, bool> handCleanRecords = new Dictionary<Define.SituationCode, bool>();
 }

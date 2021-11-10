@@ -26,7 +26,7 @@ public class Debriefing_Popup : UIPopup
         {
             case Define.Scene.Scene_1:
                 totalCnt = 10;
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S1_1; i <= Define.HandCleanRecord.S1_10; i++)
+                for (Define.SituationCode i = Define.SituationCode.S1_1; i <= Define.SituationCode.S1_10; i++)
                 {
                     if (Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i])
                         correctCnt++;
@@ -34,7 +34,7 @@ public class Debriefing_Popup : UIPopup
                 break;
             case Define.Scene.Scene_2:
                 totalCnt = 12;
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S2_1; i <= Define.HandCleanRecord.S2_12; i++)
+                for (Define.SituationCode i = Define.SituationCode.S2_1; i <= Define.SituationCode.S2_12; i++)
                 {
                     if (Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i])
                         correctCnt++;
@@ -42,7 +42,7 @@ public class Debriefing_Popup : UIPopup
                 break;
             case Define.Scene.Scene_3:
                 totalCnt = 11;
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S3_1; i <= Define.HandCleanRecord.S3_11; i++)
+                for (Define.SituationCode i = Define.SituationCode.S3_1; i <= Define.SituationCode.S3_11; i++)
                 {
                     if (Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i])
                         correctCnt++;
@@ -50,7 +50,7 @@ public class Debriefing_Popup : UIPopup
                 break;
             case Define.Scene.Scene_4:
                 totalCnt = 14;
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S4_1; i <= Define.HandCleanRecord.S4_14; i++)
+                for (Define.SituationCode i = Define.SituationCode.S4_1; i <= Define.SituationCode.S4_14; i++)
                 {
                     if (Managers.Data.recordData.handCleanRecords[i] == Managers.Data.answerSheetData.answerDict[i])
                         correctCnt++;

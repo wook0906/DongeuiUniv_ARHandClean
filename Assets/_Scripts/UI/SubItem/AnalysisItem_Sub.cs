@@ -16,7 +16,7 @@ public class AnalysisItem_Sub : UIBase
         Button_Item
     }
 
-    Define.HandCleanRecord itemRecordType;
+    Define.SituationCode itemRecordType;
 
     public override void Init()
     {
@@ -31,14 +31,22 @@ public class AnalysisItem_Sub : UIBase
     }
 
 
-    public void SetInfo(Define.HandCleanRecord recordType)
+    public void SetInfo(Define.SituationCode code)
     {
-        itemRecordType = recordType;
-        Get<Text>((int)Texts.Check).text = Managers.Data.recordData.handCleanRecords[recordType] ? "O" : "X";
-        Get<Text>((int)Texts.Result_Text).text = Managers.Data.recordData.handCleanRecords[recordType] ? "O" : "X";
+        itemRecordType = code;
+        Text checkText = Get<Text>((int)Texts.Check);
+        checkText.text = Managers.Data.recordData.handCleanRecords[code] == Managers.Data.answerSheetData.answerDict[code] ? "O" : "X";
+        checkText.color = Managers.Data.recordData.handCleanRecords[code] == Managers.Data.answerSheetData.answerDict[code] ? Color.blue : Color.red;
+        Get<Text>((int)Texts.Result_Text).text = Managers.Data.recordData.handCleanRecords[code] ? Managers.Data.situationAnalysisData.SituationDict[code].right : Managers.Data.situationAnalysisData.SituationDict[code].wrong;
     }
     public void OnClickAnalysisButton()
     {
-
+        StartCoroutine(ShowAnalysis());
+    }
+    IEnumerator ShowAnalysis()
+    {
+        Analysis_Popup popup = Managers.UI.ShowPopupUI<Analysis_Popup>();
+        yield return new WaitUntil(() => popup);
+        popup.SetText(new TextAsset(Managers.Data.situationAnalysisData.SituationDict[itemRecordType].analysis));
     }
 }

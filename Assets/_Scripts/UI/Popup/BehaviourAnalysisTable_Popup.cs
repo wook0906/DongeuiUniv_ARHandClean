@@ -43,7 +43,7 @@ public class BehaviourAnalysisTable_Popup : UIPopup
         switch (Managers.Scene.currentScene.SceneType)
         {
             case Define.Scene.Scene_1:
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S1_1; i <= Define.HandCleanRecord.S1_10; i++)
+                for (Define.SituationCode i = Define.SituationCode.S1_1; i <= Define.SituationCode.S1_10; i++)
                 {
                     AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
                     item.transform.localScale = Vector3.one;
@@ -54,7 +54,7 @@ public class BehaviourAnalysisTable_Popup : UIPopup
                 }
                 break;
             case Define.Scene.Scene_2:
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S2_1; i <= Define.HandCleanRecord.S2_12; i++)
+                for (Define.SituationCode i = Define.SituationCode.S2_1; i <= Define.SituationCode.S2_12; i++)
                 {
                     AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
                     item.transform.localScale = Vector3.one;
@@ -65,7 +65,7 @@ public class BehaviourAnalysisTable_Popup : UIPopup
                 }
                 break;
             case Define.Scene.Scene_3:
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S3_1; i <= Define.HandCleanRecord.S3_11; i++)
+                for (Define.SituationCode i = Define.SituationCode.S3_1; i <= Define.SituationCode.S3_11; i++)
                 {
                     AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
                     item.transform.localScale = Vector3.one;
@@ -76,7 +76,7 @@ public class BehaviourAnalysisTable_Popup : UIPopup
                 }
                 break;
             case Define.Scene.Scene_4:
-                for (Define.HandCleanRecord i = Define.HandCleanRecord.S4_1; i <= Define.HandCleanRecord.S4_14; i++)
+                for (Define.SituationCode i = Define.SituationCode.S4_1; i <= Define.SituationCode.S4_14; i++)
                 {
                     AnalysisItem_Sub item = Managers.UI.MakeSubItem<AnalysisItem_Sub>(scrollViewItemRoot);
                     item.transform.localScale = Vector3.one;

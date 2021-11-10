@@ -14,22 +14,18 @@ public interface ILoader<Key, Value>
 public class DataManager
 {
     public AnswerSheetData answerSheetData;
-
+    public SituationData situationAnalysisData;
     public RecordData recordData = new RecordData();
-
-    //public string fileName = "20123903";
-    //public Dictionary<Define.HandCleanRecord, bool> handCleanRecords = new Dictionary<Define.HandCleanRecord, bool>();
-
    
 
     public void Init()
     {
-        for (Define.HandCleanRecord i = Define.HandCleanRecord.S1_1; i <= Define.HandCleanRecord.S4_14; i++)
+        for (Define.SituationCode i = Define.SituationCode.S1_1; i <= Define.SituationCode.S4_14; i++)
         {
-            //handCleanRecords.Add(i, false);
             recordData.handCleanRecords.Add(i, false);
         }
         answerSheetData = Managers.Resource.Load<AnswerSheetData>("ScriptableObj/AnswerSheet");
+        situationAnalysisData = Managers.Resource.Load<SituationData>("ScriptableObj/SituationData");
     }
 
     Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
