@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ public class Scene_1 : BaseScene
 
         ui = Managers.UI.ShowSceneUI<Basic_UI>();
         Briefing_Popup briefing = Managers.UI.ShowPopupUI<Briefing_Popup>();
-        TextAsset textAsset = new TextAsset("[»óÈ²Á¦½Ã]\n\n´ç½ÅÀº º¸ÀÌ´Â º´½ÇÀÇ ´ã´ç°£È£»çÀÔ´Ï´Ù.\nÈ¯ÀÚ1Àº 2½Ã°£¸¶´Ù  Ã¼À§¸¦ º¯°æÇÏ°í ÀÖ½À´Ï´Ù.\nÈ¯ÀÚ1ÀÇ Ã¼À§¸¦ º¯°æÇÏ±â À§ÇØ º´½Ç·Î µé¾î°¡¸é¼­ »óÈ²ÀÌ ½ÃÀÛµË´Ï´Ù.\n¼Õ¼Òµ¶Á¦¸¦ ´©¸£¸é ¼ÕÀ§»ıÀ» ¼öÇàÇÏ´Â\n20ÃÊ µ¿¾ÈÀº ´Ù¸¥ È°µ¿À» ÇØ¼­´Â ¾ÈµË´Ï´Ù.");
+        string textAsset = "[ìƒí™©ì œì‹œ]\n\në‹¹ì‹ ì€ ë³´ì´ëŠ” ë³‘ì‹¤ì˜ ë‹´ë‹¹ê°„í˜¸ì‚¬ì…ë‹ˆë‹¤.\ní™˜ì1ì€ 2ì‹œê°„ë§ˆë‹¤  ì²´ìœ„ë¥¼ ë³€ê²½í•˜ê³  ìˆìŠµë‹ˆë‹¤.\ní™˜ì1ì˜ ì²´ìœ„ë¥¼ ë³€ê²½í•˜ê¸° ìœ„í•´ ë³‘ì‹¤ë¡œ ë“¤ì–´ê°€ë©´ì„œ ìƒí™©ì´ ì‹œì‘ë©ë‹ˆë‹¤.\nì†ì†Œë…ì œë¥¼ ëˆ„ë¥´ë©´ ì†ìœ„ìƒì„ ìˆ˜í–‰í•˜ëŠ”\n20ì´ˆ ë™ì•ˆì€ ë‹¤ë¥¸ í™œë™ì„ í•´ì„œëŠ” ì•ˆë©ë‹ˆë‹¤.";
  
         briefing.SetText(textAsset);
     }
@@ -39,7 +39,7 @@ public class Scene_1 : BaseScene
         ui.SetGloveButton(false);
 
         Guide_Popup guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("***È¯ÀÚÂÊ¿¡¼­ ¾Ë¶÷ÀÌ ¿ï¸®°íÀÖ´Ù!", Define.Views.Right_Patient);
+        guide.SetInfo("***í™˜ììª½ì—ì„œ ì•ŒëŒì´ ìš¸ë¦¬ê³ ìˆë‹¤!", Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
 
         currentRecord = Define.SituationCode.S1_1;
@@ -54,10 +54,10 @@ public class Scene_1 : BaseScene
         infectionState |= Define.Infection.Right;
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
-        Debug.Log("¸ğ´ÏÅÍ ¾Ë¶÷ ²¨Áü!");
+        Debug.Log("ëª¨ë‹ˆí„° ì•ŒëŒ êº¼ì§!");
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("***È¯ÀÚÀÇ »ê¼ÒÆ÷È­µµ ÃøÁ¤±â°¡ ºüÁ®ÀÖ´Ù!",Define.Views.Right_Patient);
+        guide.SetInfo("***í™˜ìì˜ ì‚°ì†Œí¬í™”ë„ ì¸¡ì •ê¸°ê°€ ë¹ ì ¸ìˆë‹¤!",Define.Views.Right_Patient);
         yield return new WaitUntil(() => guide == null);
 
         currentRecord = Define.SituationCode.S1_2;
@@ -71,7 +71,7 @@ public class Scene_1 : BaseScene
         infectionState |= Define.Infection.Right;
         bedFenceUp.SetActive(false);
         bedFenceDown.SetActive(true);
-        Debug.Log("Ææ½º ³»·Á°¨!");
+        Debug.Log("íœìŠ¤ ë‚´ë ¤ê°!");
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
@@ -86,7 +86,7 @@ public class Scene_1 : BaseScene
         GenerateCovid(GameObject.Find("OxygenChecker").transform, infectionState);
         infectionState |= Define.Infection.Right;
         oxygenChecker.transform.position = oxygenCheckerTargetTransform.position;
-        Debug.Log("»ê¼ÒÆ÷È­µµ ÃøÁ¤±â ¿øÀ§Ä¡ ÇÔ!");
+        Debug.Log("ì‚°ì†Œí¬í™”ë„ ì¸¡ì •ê¸° ì›ìœ„ì¹˜ í•¨!");
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
@@ -106,13 +106,13 @@ public class Scene_1 : BaseScene
 
         currentRecord = Define.SituationCode.S1_5;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("***È¯ÀÚÀÇ È£Ãâ!", Define.Views.Left_Patient_RightView);
+        guide.SetInfo("***í™˜ìì˜ í˜¸ì¶œ!", Define.Views.Left_Patient_RightView);
         yield return new WaitUntil(() => guide == null);
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         SpeechBubble_Popup speech = Managers.UI.MakeWorldSpaceUI<SpeechBubble_Popup>();
-        speech.SetText(new TextAsset("Ä§´ë Á» ¿Ã·ÁÁÖ¼¼¿ä"));
+        speech.SetText(new TextAsset("ì¹¨ëŒ€ ì¢€ ì˜¬ë ¤ì£¼ì„¸ìš”"));
         speech.SetAnchor(GameObject.Find("LeftPatientHead").transform, Define.Views.Left_Patient_RightView);
         needRenewPositionPopupList.Add(speech);
         yield return new WaitUntil(() => speech == null);
@@ -125,12 +125,12 @@ public class Scene_1 : BaseScene
         yield return StartCoroutine(WaitTakeDone());
         GenerateCovid(GameObject.Find("LeftBedLever").transform, infectionState);
         infectionState |= Define.Infection.Left;
-        Debug.Log("¿ŞÂÊ È¯ÀÚÀÇ Ä§´ë¸¦ ¿Ã·ÁÁÜ!");
+        Debug.Log("ì™¼ìª½ í™˜ìì˜ ì¹¨ëŒ€ë¥¼ ì˜¬ë ¤ì¤Œ!");
        
         
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("È¯ÀÚÀÇ Ã¼À§¸¦ ¹Ù²ãÁÖÀÚ.", Define.Views.Left_Patient_RightView);
+        guide.SetInfo("í™˜ìì˜ ì²´ìœ„ë¥¼ ë°”ê¿”ì£¼ì.", Define.Views.Left_Patient_RightView);
         yield return new WaitUntil(() => guide == null);
 
         currentRecord = Define.SituationCode.S1_6;
@@ -141,7 +141,7 @@ public class Scene_1 : BaseScene
         yield return StartCoroutine(WaitTakeDone());
         GenerateCovid(GameObject.Find("RightPillow").transform, infectionState);
         infectionState |= Define.Infection.Left;
-        Debug.Log("¿À¸¥ÂÊÀ¸·Î µ¹¾Æ´©¿öÀÖ´Â È¯ÀÚ µî¿¡ÀÖ´Â º£°Ô¸¦ Ä¡¿ò!");
+        Debug.Log("ì˜¤ë¥¸ìª½ìœ¼ë¡œ ëŒì•„ëˆ„ì›ŒìˆëŠ” í™˜ì ë“±ì—ìˆëŠ” ë² ê²Œë¥¼ ì¹˜ì›€!");
         pillowRight.SetActive(false);
         originLeftPatient.SetActive(true);
         rightLyingPatient.SetActive(false);
@@ -157,7 +157,7 @@ public class Scene_1 : BaseScene
         yield return StartCoroutine(WaitTakeDone());
         GenerateCovid(GameObject.Find("LeftPatientBody").transform, infectionState);
         infectionState |= Define.Infection.Left;
-        Debug.Log("È¯ÀÚ¸¦ ¿ŞÂÊÀ¸·Î µ¹·Á ´¯Èû!");
+        Debug.Log("í™˜ìë¥¼ ì™¼ìª½ìœ¼ë¡œ ëŒë ¤ ëˆ•í˜!");
         originLeftPatient.SetActive(false);
         leftLyingPatient.SetActive(true);
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
@@ -165,7 +165,7 @@ public class Scene_1 : BaseScene
 
 
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("¿ŞÂÊ¿¡ º£°³¸¦ ³¢¿öÁÖÀÚ.", Define.Views.Left_Patient_LeftView);
+        guide.SetInfo("ì™¼ìª½ì— ë² ê°œë¥¼ ë¼ì›Œì£¼ì.", Define.Views.Left_Patient_LeftView);
         yield return new WaitUntil(() => guide == null);
 
         currentRecord = Define.SituationCode.S1_8;
@@ -176,7 +176,7 @@ public class Scene_1 : BaseScene
         yield return StartCoroutine(WaitTakeDone());
         GenerateCovid(GameObject.Find("LeftPillow").transform, infectionState);
         infectionState |= Define.Infection.Left;
-        Debug.Log("º£°Ô¸¦ µî¿¡ °®´Ù ´ë¾îÁÜ!");
+        Debug.Log("ë² ê²Œë¥¼ ë“±ì— ê°–ë‹¤ ëŒ€ì–´ì¤Œ!");
         pillowLeft.SetActive(true);
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
@@ -189,21 +189,21 @@ public class Scene_1 : BaseScene
         yield return StartCoroutine(WaitTakeDone());
         GenerateCovid(GameObject.Find("LeftPatientBody").transform, infectionState);
         infectionState |= Define.Infection.Left;
-        Debug.Log("ÀÌºÒ µ¤¾îÁÜ!");
+        Debug.Log("ì´ë¶ˆ ë®ì–´ì¤Œ!");
         leftBedBlanket.SetActive(true);
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
         currentRecord = Define.SituationCode.S1_10;
         guide = Managers.UI.ShowPopupUI<Guide_Popup>();
-        guide.SetInfo("¸ğµç Ã³Ä¡¸¦ ¿Ï·áÇÏ¿´À½. Åğ½ÇÇÕ´Ï±î?", Define.Views.Both);
+        guide.SetInfo("ëª¨ë“  ì²˜ì¹˜ë¥¼ ì™„ë£Œí•˜ì˜€ìŒ. í‡´ì‹¤í•©ë‹ˆê¹Œ?", Define.Views.Both);
         yield return new WaitUntil(() => guide == null);
         GenerateCovid(GameObject.Find("RightHand").transform, infectionState, true);
         GenerateCovid(GameObject.Find("LeftHand").transform, infectionState, true);
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        Debug.Log("Æò°¡ µ¥ÀÌÅÍ Àü¼Û, »óÈ²1 Á¾·á");
+        Debug.Log("í‰ê°€ ë°ì´í„° ì „ì†¡, ìƒí™©1 ì¢…ë£Œ");
 
         Debriefing_Popup debriefing = Managers.UI.ShowPopupUI<Debriefing_Popup>();
         yield return new WaitUntil(() => debriefing == null);

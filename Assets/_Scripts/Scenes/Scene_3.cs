@@ -20,7 +20,7 @@ public class Scene_3 : BaseScene
         
         ui = Managers.UI.ShowSceneUI<Basic_UI>();
         Briefing_Popup briefing = Managers.UI.ShowPopupUI<Briefing_Popup>();
-        TextAsset textAsset = new TextAsset("[상황제시]\n\n당신은 221호 담당간호사입니다.\n환자 1은 우측 쇄골 아래 반창고 부착 부위의 표피의 찰과상으로 피부소독이 필요한 상태입니다.\n장갑을 착용하고 드레싱을 하고 있는 상황에서 시작됩니다.\n손소독제를 누르면 손위생을 수행하는 20초 동안은 다른 활동을 해서는 안됩니다.");
+        string textAsset = "[상황제시]\n\n당신은 221호 담당간호사입니다.\n환자 1은 우측 쇄골 아래 반창고 부착 부위의 표피의 찰과상으로 피부소독이 필요한 상태입니다.\n장갑을 착용하고 드레싱을 하고 있는 상황에서 시작됩니다.\n손소독제를 누르면 손위생을 수행하는 20초 동안은 다른 활동을 해서는 안됩니다.";
 
         briefing.SetText(textAsset);
     }

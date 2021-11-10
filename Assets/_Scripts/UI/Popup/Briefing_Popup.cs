@@ -37,14 +37,14 @@ public class Briefing_Popup : UIPopup
         isInit = true;
     }
 
-    public void SetText(TextAsset textAsset)
+    public void SetText(string textAsset)
     {
         StartCoroutine(CorSetText(textAsset));
     }
-    IEnumerator CorSetText(TextAsset textAsset)
+    IEnumerator CorSetText(string textAsset)
     {
         yield return new WaitUntil(() => isInit);
-        Get<Text>((int)Texts.Briefing_Content).text = textAsset.text;
+        Get<Text>((int)Texts.Briefing_Content).text = textAsset;
     }
    
 }

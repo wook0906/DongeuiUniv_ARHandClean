@@ -34,7 +34,7 @@ public class Scene_2 : BaseScene
 
         ui = Managers.UI.ShowSceneUI<Basic_UI>();
         Briefing_Popup briefing = Managers.UI.ShowPopupUI<Briefing_Popup>();
-        TextAsset textAsset = new TextAsset("[상황제시]\n\n상황2에 대한 브리핑 UI입니다.");
+        string textAsset = "[상황제시]\n\n상황2에 대한 브리핑 UI입니다.";
 
         briefing.SetText(textAsset);
     }
