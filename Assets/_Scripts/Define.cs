@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Define
 {
+    public enum HandCleanSituationType
+    {
+        BeforeContactingThePatient,
+        BeforeCleanlinessAndAsepticTreatment,
+        AfterTheRiskOfExposureToBodyFluids,
+        AfterContactingThePatient,
+        AfterContactingThePatientsSurroundings,
+        None
+    }
     public enum Infection
     {
         None,

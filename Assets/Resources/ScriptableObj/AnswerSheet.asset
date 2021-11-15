@@ -14,4 +14,98 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answerDict:
     m_keys: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000
-    m_values: 0001000100010000000100010000010101010000010100010101010000000100010001010000000001010001000101
+    m_values:
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 0000000003000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 04000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 0000000003000000
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 03000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 01000000
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 00000000
+    - answer: 1
+      typeList: 01000000
+    - answer: 1
+      typeList: 02000000
+    - answer: 1
+      typeList: 0400000000000000
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 0000000003000000
+    - answer: 1
+      typeList: 03000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 0200000000000000
+    - answer: 1
+      typeList: 0200000001000000
+    - answer: 1
+      typeList: 0200000000000000
+    - answer: 1
+      typeList: 03000000
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 04000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 04000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 00000000
+    - answer: 1
+      typeList: 01000000
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 02000000
+    - answer: 1
+      typeList: 02000000
+    - answer: 1
+      typeList: 04000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 01000000
+    - answer: 0
+      typeList: 
+    - answer: 1
+      typeList: 02000000
+    - answer: 1
+      typeList: 04000000

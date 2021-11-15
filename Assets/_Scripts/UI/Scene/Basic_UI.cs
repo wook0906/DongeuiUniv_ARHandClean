@@ -179,6 +179,7 @@ public class Basic_UI : UIScene
         CurrentView = prevView;
         BaseScene curScene = GameObject.Find("@Scene").GetComponent<BaseScene>();
         curScene.infectionState = Define.Infection.None;
+        curScene.isDidCleanHand = true;
         Get<Image>((int)Images.Timer_Image).fillAmount = 1;
         Get<Text>((int)Texts.Count_Text).enabled = false;
         Get<Image>((int)Images.Hand_Image).enabled = false;
@@ -222,7 +223,8 @@ public class Basic_UI : UIScene
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Managers.Data.Save();
+            Managers.Data.SaveRecord();
         }
+        
     }
 }

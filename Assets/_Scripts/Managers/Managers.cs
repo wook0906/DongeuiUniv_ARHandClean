@@ -25,6 +25,7 @@ public class Managers : MonoBehaviour
     SceneManagerEx scene = new SceneManagerEx();
     SoundManager sound = new SoundManager();
     UIManager ui = new UIManager();
+    SocketManager socket = new SocketManager();
 
     public static DataManager Data { get { return S.data; } }
     public static InputManager Input { get { return S.input; } }
@@ -33,6 +34,7 @@ public class Managers : MonoBehaviour
     public static SceneManagerEx Scene { get { return S.scene; } }
     public static SoundManager Sound { get { return S.sound; } }
     public static UIManager UI { get { return S.ui; } }
+    public static SocketManager SocketManager { get { return S.socket; } }
     #endregion
 
     static void Init()
@@ -57,6 +59,7 @@ public class Managers : MonoBehaviour
     void Start()
     {
         Init();
+        instance.socket.Start();
     }
 
     // Update is called once per frame
