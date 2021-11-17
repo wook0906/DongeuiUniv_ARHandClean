@@ -20,6 +20,9 @@ public class Scene_4 : BaseScene
     public GameObject needleOnFinger;
     public GameObject blood;
 
+    public GameObject originTray;
+    public GameObject ARCamToothTray;
+
     public GameObject leftBedTray;
     public GameObject leftBedTableDown;
     public GameObject leftBedTableUp;
@@ -73,7 +76,7 @@ public class Scene_4 : BaseScene
         infectionState |= Define.Infection.Right;
         trayOnTable.SetActive(true);
 
-        GameObject.Find("tray").gameObject.SetActive(false);
+        originTray.gameObject.SetActive(false);
         
         Debug.Log("트레이 내려놓음!");
 
@@ -223,7 +226,8 @@ public class Scene_4 : BaseScene
         Managers.Data.recordData.handCleanRecords[currentRecord] = isDidCleanHand;
         isDidCleanHand = false;
 
-        GameObject.Find("tray").gameObject.SetActive(true);
+        originTray.SetActive(false);
+        ARCamToothTray.SetActive(true);
 
         currentRecord = Define.SituationCode.S4_10;
         focus = Managers.UI.MakeWorldSpaceUI<Focusing_Popup>();
@@ -245,7 +249,7 @@ public class Scene_4 : BaseScene
         infectionState |= Define.Infection.Left;
         leftBedTray.SetActive(true);
 
-        GameObject.Find("tray").gameObject.SetActive(false);
+        ARCamToothTray.SetActive(false);
 
 
         ui.SetGloveButton(true);

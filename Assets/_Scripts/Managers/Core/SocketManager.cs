@@ -107,7 +107,7 @@ public class SocketManager
         }
         catch (Exception e)
         {
-            //Console.WriteLine(e.ToString());
+            Console.WriteLine(e.ToString());
         }
     }
 
