@@ -332,8 +332,6 @@ public class Scene_4 : BaseScene
 
         Managers.Data.recordData.endTime = System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
-        Managers.UI.ShowPopupUI<TotalResult_Popup>();
-
         Managers.Data.SaveRecord();
 
         Debriefing_Popup debriefing = Managers.UI.ShowPopupUI<Debriefing_Popup>();

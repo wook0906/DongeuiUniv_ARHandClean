@@ -34,7 +34,7 @@ public class Scene_2 : BaseScene
 
         ui = Managers.UI.ShowSceneUI<Basic_UI>();
         Briefing_Popup briefing = Managers.UI.ShowPopupUI<Briefing_Popup>();
-        string textAsset = "[상황제시]\n\n상황2에 대한 브리핑 UI입니다.";
+        string textAsset = "[상황제시]\n\n당신은 221호 담당간호사입니다.\n주치의가 환자 1에게 주입 중인 수액을 중단하고 변경된 수액을 주사하라는 처방을 했습니다.\n간호사실에서 처방된 수액을 준비하였고 수액 교체를 위하여 트레이를 갖고 병실로 들어가면서 상황이 시작됩니다.\n손소독제를 누르면 손위생을 수행하는 20초 동안은 다른 활동을 해서는 안됩니다.";
 
         briefing.SetText(textAsset);
     }

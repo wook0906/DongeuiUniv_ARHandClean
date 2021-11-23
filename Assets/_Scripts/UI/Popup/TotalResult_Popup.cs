@@ -55,7 +55,7 @@ public class TotalResult_Popup : UIPopup
         int min = handCleanSituationTypeArray.Min();
         for (Define.HandCleanSituationType type = Define.HandCleanSituationType.BeforeContactingThePatient; type < Define.HandCleanSituationType.None; type++)
         {
-            Debug.Log($"Min : {min}, type : {type}");
+            //Debug.Log($"Min : {min}, type : {type}");
             if(handCleanSituationTypeArray[(int)type] == min)
                 GetImage((int)type).color = Color.red;
         }

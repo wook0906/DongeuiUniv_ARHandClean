@@ -33,8 +33,10 @@ public class Basic_UI : UIScene
             }
 
             ARCam.gameObject.SetActive(false);
+            UICam.gameObject.SetActive(false);
             ARCam.transform.position = viewTransformDict[currentView].position;
             ARCam.transform.rotation = viewTransformDict[currentView].rotation;
+            UICam.gameObject.SetActive(true);
             ARCam.gameObject.SetActive(true);
 
             GameObject.Find("@Scene").GetComponent<BaseScene>().RenewFocusPositions();
@@ -156,7 +158,7 @@ public class Basic_UI : UIScene
         Get<Image>((int)Images.Hand_Image).enabled = true;
         Get<Image>((int)Images.Timer_Image).enabled = true;
 
-        float count = 20;
+        float count = 5;
         Get<Text>((int)Texts.Count_Text).text = count.ToString();
         while (count > 0)
         {
@@ -172,7 +174,7 @@ public class Basic_UI : UIScene
             }
             count -= Time.deltaTime;
             Get<Text>((int)Texts.Count_Text).text = count.ToString();
-            Get<Image>((int)Images.Timer_Image).fillAmount -= Time.deltaTime / 20;
+            Get<Image>((int)Images.Timer_Image).fillAmount -= Time.deltaTime / 5;
             yield return null;
         }
         isTimerOn = false;
